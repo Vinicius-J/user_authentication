@@ -8,7 +8,7 @@ export class LoginUseCase {
     private authService: AuthService
   ) {}
 
-  async execute(email: Email, password: string) {
+  async execute(email: string, password: string) {
     const user = await this.repository.findByEmail(email);
 
     if (!user) {

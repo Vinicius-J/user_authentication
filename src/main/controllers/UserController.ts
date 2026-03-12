@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { makeFindAllUsersUseCase } from '../factories/Users/makeFindAllUsersUseCase';
-import { makeCreateUserUseCase } from '../factories/Users/makeCreateUserUseCase';
-import { makeChangeEmailUserUseCase } from '../factories/Users/makeChangeEmailUserUseCase';
+import { makeFindAllUsersUseCase } from '../factories/Users/InJsonUserRepository/makeFindAllUsersUseCase';
+import { makeCreateUserUseCase } from '../factories/Users/InJsonUserRepository/makeCreateUserUseCase';
+import { makeChangeEmailUserUseCase } from '../factories/Users/InJsonUserRepository/makeChangeEmailUserUseCase';
 
 export class UserController {
   async index(req: Request, res: Response) {

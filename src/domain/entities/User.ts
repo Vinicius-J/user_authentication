@@ -1,14 +1,19 @@
 import { Email } from '../valueObjects/Email';
 
 export class User {
+  public createdAt: Date;
   constructor(
     public id: string,
     public name: string,
-    public email: Email,
+    public lastname: string,
+    public email: string,
     public password: string
   ) {
     if (!name) {
       throw new Error('Name cannot be empty');
+    }
+    if (!lastname) {
+      throw new Error('Last name cannot be empty');
     }
     if (!email) {
       throw new Error('Email cannot be empty');
@@ -16,6 +21,7 @@ export class User {
     if (!password) {
       throw new Error('Password cannot be empty');
     }
+    this.createdAt = new Date();
   }
 
   getPassword() {
@@ -26,7 +32,7 @@ export class User {
     return this.email;
   }
 
-  changeEmail(newEmail: Email) {
+  changeEmail(newEmail: string) {
     if (newEmail === this.email) {
       throw new Error('Email must be different');
     }

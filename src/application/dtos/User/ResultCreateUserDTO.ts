@@ -1,7 +1,7 @@
-import { Email } from '../../../domain/valueObjects/Email';
-
 export interface ResultCreateUserDTO {
   id: string;
   name: string;
-  email: Email;
+  lastname: string;
+  email: string;
+  createdAt: Date;
 }
