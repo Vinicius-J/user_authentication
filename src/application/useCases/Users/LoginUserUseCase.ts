@@ -1,5 +1,6 @@
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 import { AuthService } from '../../../domain/services/AuthService';
+import { Email } from '../../../domain/valueObjects/Email';
 
 export class LoginUseCase {
   constructor(
@@ -7,7 +8,7 @@ export class LoginUseCase {
     private authService: AuthService
   ) {}
 
-  async execute(email: string, password: string) {
+  async execute(email: Email, password: string) {
     const user = await this.repository.findByEmail(email);
 
     if (!user) {

@@ -1,10 +1,11 @@
 import { User } from '../../../domain/entities/User';
+import { Email } from '../../../domain/valueObjects/Email';
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 
 export class ChangeEmailUserUseCase {
   constructor(private repository: IUserRepository) {}
 
-  async execute(id: string, newEmail: string): Promise<User> {
+  async execute(id: string, newEmail: Email): Promise<User> {
     const user = await this.repository.findById(id);
 
     if (!user) {
