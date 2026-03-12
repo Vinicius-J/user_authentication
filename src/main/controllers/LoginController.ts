@@ -32,6 +32,4 @@ export class LoginController {
       if (err instanceof Error) return res.status(400).json({ error: err.message });
     }
   }
-
-  async logout(req: Request, res: Response) {}
 }

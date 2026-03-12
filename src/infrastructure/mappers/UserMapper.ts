@@ -5,7 +5,6 @@ Entity ↔ DTO
 */
 
 import { User } from '../../domain/entities/User';
-import { Email } from '../../domain/valueObjects/Email';
 
 export class UserMapper {
   // static toDomain(row: any): User {

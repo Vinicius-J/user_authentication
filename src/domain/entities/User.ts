@@ -1,20 +1,16 @@
-import { Email } from '../valueObjects/Email';
+import { IUserRole } from '../repositories/IUserRole';
 
 export class User {
   public createdAt: Date;
   constructor(
     public id: string,
-    public role: 'admin' | 'user',
+    public role: IUserRole,
     public name: string,
-    public lastname: string,
     public email: string,
     public password: string
   ) {
     if (!name) {
       throw new Error('Name cannot be empty');
-    }
-    if (!lastname) {
-      throw new Error('Last name cannot be empty');
     }
     if (!email) {
       throw new Error('Email cannot be empty');

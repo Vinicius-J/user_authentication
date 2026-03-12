@@ -40,16 +40,10 @@ export class InJsonUserRepository implements IUserRepository {
   }
 
   async initFile(): Promise<void> {
-    // const file = await fs.readFile(filePath);
-    // if (file.length < 0) {
-    //   return fs.writeFile(filePath, '[]', 'utf8');
-    // }
-    // return await fs.access(filePath);
-
     try {
       return await fs.access(filePath);
     } catch (error) {
-      return fs.writeFile(filePath, '[]', 'utf8');
+      return await fs.writeFile(filePath, '[]', 'utf8');
     }
   }
 }

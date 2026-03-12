@@ -17,14 +17,13 @@ export class LoginRegisterUseCase {
 
     // const user = new User(randomUUID(), body.name, email, body.password);
 
-    const user = UserFactory.create(body.name, body.lastname, body.email, body.password);
+    const user = UserFactory.create(body.name, body.email, body.password);
 
     await this.repository.save(user);
 
     return {
       id: user.id,
       name: user.name,
-      lastname: user.lastname,
       email: user.email,
       createdAt: user.createdAt,
     };

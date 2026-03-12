@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { HomeController } from '../controllers/HomeController';
 const homeRoutes = Router();
 
-import { authenticate } from '../../infrastructure/middlewares/auth';
+import { authenticate } from '../../infrastructure/middlewares/authentication';
 
 const controller = new HomeController();
 
