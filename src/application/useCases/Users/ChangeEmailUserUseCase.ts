@@ -1,5 +1,4 @@
 import { User } from '../../../domain/entities/User';
-import { Email } from '../../../domain/valueObjects/Email';
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 
 export class ChangeEmailUserUseCase {

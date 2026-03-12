@@ -1,6 +1,5 @@
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 import { AuthService } from '../../../domain/services/AuthService';
-import { Email } from '../../../domain/valueObjects/Email';
 
 export class LoginUseCase {
   constructor(
@@ -15,7 +14,7 @@ export class LoginUseCase {
       throw new Error('User not found');
     }
 
-    const valid = this.authService.comparePassword(password, user.getPassword());
+    const valid = this.authService.comparePassword(password, user.password);
 
     if (!valid) {
       throw new Error('Invalid password');

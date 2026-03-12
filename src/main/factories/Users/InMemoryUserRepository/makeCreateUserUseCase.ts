@@ -1,7 +1,7 @@
-import { CreateUserUseCase } from '../../../../application/useCases/Users/CreateUserUseCase';
+import { LoginRegisterUseCase } from '../../../../application/useCases/Login/LoginRegisterUseCase';
 import { InMemoryUserRepository } from '../../../../infrastructure/repositories/InMemoryUserRepository';
 
 export function makeCreateUserUseCase() {
   const repository = new InMemoryUserRepository();
-  return new CreateUserUseCase(repository);
+  return new LoginRegisterUseCase(repository);
 }

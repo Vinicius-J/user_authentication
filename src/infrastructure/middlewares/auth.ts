@@ -1,16 +1,6 @@
 import 'dotenv/config';
-import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-
-const secretKey = process.env.JWT_SECRET;
-
-declare global {
-  namespace Express {
-    interface Request {
-      user?: { id: number; role: string };
-    }
-  }
-}
+import { Request, Response, NextFunction } from 'express';
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -20,8 +10,19 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   }
 
   try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+      id: string;
+      role: string;
+    };
+    if (!decoded) throw new Error('Invalid token');
+
+    req.user = {
+      id: decoded.id,
+      role: decoded.role,
+    };
+    next();
   } catch (error) {
-    res.status(401).json({ message: 'Invalid token' });
+    if (error instanceof Error) throw new Error(error.message);
   }
 };
 

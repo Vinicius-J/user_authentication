@@ -1,6 +1,5 @@
 import { User } from '../../domain/entities/User';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';
-import { Email } from '../../domain/valueObjects/Email';
 
 export class InMemoryUserRepository implements IUserRepository {
   private users: User[] = [];

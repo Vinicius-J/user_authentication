@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { makeLoginUseCase } from '../factories/Login/InJsonUserRepository/makeLoginUseCase';
+import { makeLoginRegisterUseCase } from '../factories/Login/InJsonUserRepository/makeLoginRegisterUseCase';
 
 export class LoginController {
   async index(req: Request, res: Response) {
@@ -7,13 +9,29 @@ export class LoginController {
 
   async register(req: Request, res: Response) {
     try {
-      return res.status(201).json({ message: 'Login' });
+      const useCase = makeLoginRegisterUseCase();
+
+      const user = await useCase.execute(req.body);
+
+      return res.status(201).json(user);
     } catch (err) {
-      return res.status(400).json({ err });
+      if (err instanceof Error) return res.status(400).json({ error: err.message });
     }
   }
 
-  async login(req: Request, res: Response) {}
+  async login(req: Request, res: Response) {
+    try {
+      const useCase = makeLoginUseCase();
+
+      const { email, password } = req.body;
+
+      const login = await useCase.execute(email, password);
+
+      return res.status(201).json(login);
+    } catch (err) {
+      if (err instanceof Error) return res.status(400).json({ error: err.message });
+    }
+  }
 
   async logout(req: Request, res: Response) {}
 }

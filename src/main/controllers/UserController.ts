@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { makeFindAllUsersUseCase } from '../factories/Users/InJsonUserRepository/makeFindAllUsersUseCase';
-import { makeCreateUserUseCase } from '../factories/Users/InJsonUserRepository/makeCreateUserUseCase';
 import { makeChangeEmailUserUseCase } from '../factories/Users/InJsonUserRepository/makeChangeEmailUserUseCase';
 
 export class UserController {
@@ -15,18 +14,6 @@ export class UserController {
       }
 
       return res.status(200).json({ message: 'User' });
-    } catch (err) {
-      if (err instanceof Error) return res.status(400).json({ error: err.message });
-    }
-  }
-
-  async create(req: Request, res: Response) {
-    try {
-      const useCase = makeCreateUserUseCase();
-
-      const user = await useCase.execute(req.body);
-
-      return res.status(201).json(user);
     } catch (err) {
       if (err instanceof Error) return res.status(400).json({ error: err.message });
     }

@@ -4,6 +4,7 @@ export class User {
   public createdAt: Date;
   constructor(
     public id: string,
+    public role: 'admin' | 'user',
     public name: string,
     public lastname: string,
     public email: string,

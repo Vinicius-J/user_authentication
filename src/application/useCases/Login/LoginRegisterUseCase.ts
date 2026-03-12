@@ -3,7 +3,7 @@ import { CreateUserDTO } from '../../dtos/User/CreateUserDTO';
 import { ResultCreateUserDTO } from '../../dtos/User/ResultCreateUserDTO';
 import { UserFactory } from '../../factories/UserFactory';
 
-export class CreateUserUseCase {
+export class LoginRegisterUseCase {
   constructor(private repository: IUserRepository) {}
 
   async execute(body: CreateUserDTO): Promise<ResultCreateUserDTO> {
