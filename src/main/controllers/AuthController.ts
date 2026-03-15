@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { makeAuthUsCase } from '../factories/Auth/makeAuthUsCase';
+import { makeAuthUsCase } from '../factories/Auth/makeAuthUseCase';
 
 export class AuthController {
   async store(req: Request, res: Response) {
