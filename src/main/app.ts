@@ -1,8 +1,8 @@
 import express from 'express';
 
 import homeRoutes from './routes/homeRoutes';
-import loginRoutes from './routes/loginRoutes';
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
 
 class App {
   app;
@@ -19,8 +19,8 @@ class App {
 
   routes() {
     this.app.use('/', homeRoutes);
-    this.app.use('/login', loginRoutes);
     this.app.use('/user', userRoutes);
+    this.app.use('/auth', authRoutes);
   }
 }
 

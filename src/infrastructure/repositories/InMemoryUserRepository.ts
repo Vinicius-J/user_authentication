@@ -1,3 +1,4 @@
+import { CreateUserDTO } from '../../application/dtos/User/CreateUserDTO';
 import { User } from '../../domain/entities/User';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';
 
@@ -27,5 +28,13 @@ export class InMemoryUserRepository implements IUserRepository {
   async findById(userId: string): Promise<User | undefined> {
     const user = this.users.find(u => u.id === userId);
     return user;
+  }
+
+  async update(user: CreateUserDTO): Promise<User> {
+    throw new Error('Method not implemented.');
+  }
+
+  delete(id: string): Promise<User> {
+    throw new Error('Method not implemented.');
   }
 }

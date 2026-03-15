@@ -1,19 +1,14 @@
-import { User } from '../../../domain/entities/User';
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 
-export class ChangePasswordUserUseCase {
+export class FindUserByIdUseCase {
   constructor(private repository: IUserRepository) {}
 
-  async execute(id: string, password: string): Promise<User> {
+  async execute(id: string) {
     const user = await this.repository.findById(id);
 
     if (!user) {
       throw new Error('User not found');
     }
-
-    user.changePassword(password);
-
-    await this.repository.save(user);
 
     return user;
   }

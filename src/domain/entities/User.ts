@@ -29,6 +29,13 @@ export class User {
     return this.email;
   }
 
+  changeName(newName: string) {
+    if (newName === this.name) {
+      throw new Error('Name must be different');
+    }
+    this.name = newName;
+  }
+
   changeEmail(newEmail: string) {
     if (newEmail === this.email) {
       throw new Error('Email must be different');

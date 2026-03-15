@@ -6,8 +6,19 @@ const userRoutes = Router();
 
 const controller = new UserController();
 
+// userRoutes.get('/', authenticate, authorization('admin'), controller.index);
 userRoutes.get('/', controller.index);
-userRoutes.get('/board', authenticate, authorization('admin'), controller.show);
+userRoutes.post('/', controller.store);
+userRoutes.get('/:id', controller.show);
 userRoutes.put('/:id', controller.update);
+userRoutes.delete('/:id', controller.delete);
+
+/*
+index -> lista todos usuários -> GET
+show -> mostra um usuário -> GET
+store / create -> cria um novo usuário -> POST
+update -> atualiza um usuário -> PATCH ou PUT
+delete -> apaga um usuário -> DELETE
+*/
 
 export default userRoutes;

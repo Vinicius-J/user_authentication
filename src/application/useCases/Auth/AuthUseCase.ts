@@ -1,7 +1,8 @@
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
 import { AuthService } from '../../../domain/services/AuthService';
 import { ITokenService } from '../../services/ITokenService';
-export class LoginUseCase {
+
+export class AuthUseCase {
   constructor(
     private repository: IUserRepository,
     private authService: AuthService,
