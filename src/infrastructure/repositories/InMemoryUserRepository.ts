@@ -1,4 +1,3 @@
-import { CreateUserDTO } from '../../application/dtos/User/CreateUserDTO';
 import { User } from '../../domain/entities/User';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';
 
@@ -30,7 +29,7 @@ export class InMemoryUserRepository implements IUserRepository {
     return user;
   }
 
-  async update(user: CreateUserDTO): Promise<User> {
+  async update(user: User): Promise<User> {
     throw new Error('Method not implemented.');
   }
 

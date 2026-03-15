@@ -4,10 +4,10 @@ export class User {
   public createdAt: Date;
   constructor(
     public id: string,
-    public role: IUserRole,
     public name: string,
     public email: string,
-    public password: string
+    public password: string,
+    public role: IUserRole = 'user'
   ) {
     if (!name) {
       throw new Error('Name cannot be empty');
@@ -47,5 +47,6 @@ export class User {
     if (newPassword === this.password) {
       throw new Error('Password must be different');
     }
+    this.password = newPassword;
   }
 }

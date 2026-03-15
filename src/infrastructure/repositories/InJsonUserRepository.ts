@@ -3,7 +3,6 @@ import path from 'path';
 
 import { User } from '../../domain/entities/User';
 import { IUserRepository } from '../../domain/repositories/IUserRepository';
-import { CreateUserDTO } from '../../application/dtos/User/CreateUserDTO';
 
 const filePath = path.resolve(__dirname, '..', '..', '..', 'UserJsonRepositoy.json');
 
@@ -48,35 +47,37 @@ export class InJsonUserRepository implements IUserRepository {
     }
   }
 
-  async update(userUpdate: CreateUserDTO): Promise<User> {
+  async update(id: string, userUpdate: User): Promise<User | undefined> {
     await this.initFile();
     const userRepo = await fs.readFile(filePath, 'utf8');
     const arrRepo: User[] = JSON.parse(userRepo);
-    const user = arrRepo.find(u => u.email === userUpdate.email);
+    const user = arrRepo.find(u => u.id === id);
 
-    if (!user) {
-      throw new Error('User not found');
-    }
+    arrRepo.forEach((u, i) => {
+      if (u.id === id) {
+        arrRepo[i] = userUpdate;
+      }
+    });
+
+    const newUserRepo = JSON.stringify(arrRepo, null, 2);
+    await fs.writeFile(filePath, newUserRepo, 'utf8');
 
     return user;
   }
 
-  async delete(id: string): Promise<User> {
+  async delete(id: string): Promise<User | undefined> {
     const userRepo = await fs.readFile(filePath, 'utf8');
     const arrRepo: User[] = JSON.parse(userRepo);
 
     const deletedUser = arrRepo.find(u => u.id === id);
-    if (!deletedUser) {
-      throw new Error('User not found');
+
+    if (deletedUser) {
+      const newArrRepo = arrRepo.filter(user => {
+        return user.id !== deletedUser.id;
+      });
+      const newUserRepo = JSON.stringify(newArrRepo, null, 2);
+      await fs.writeFile(filePath, newUserRepo, 'utf8');
     }
-
-    const newArrRepo = arrRepo.filter(user => {
-      return user.id !== deletedUser.id;
-    });
-
-    const newUserRepo = JSON.stringify(newArrRepo, null, 2);
-
-    await fs.writeFile(filePath, newUserRepo, 'utf8');
 
     return deletedUser;
   }

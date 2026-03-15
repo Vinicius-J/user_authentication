@@ -1,9 +1,13 @@
 import { IUserRepository } from '../../../domain/repositories/IUserRepository';
+import { AuthService } from '../../../domain/services/AuthService';
 import { CreateUserDTO } from '../../dtos/User/CreateUserDTO';
 import { UserFactory } from '../../factories/UserFactory';
 
 export class ChangeUserUseCase {
-  constructor(private repository: IUserRepository) {}
+  constructor(
+    private repository: IUserRepository,
+    private authService: AuthService
+  ) {}
 
   async execute(id: string, body: CreateUserDTO) {
     const user = await this.repository.findById(id);
@@ -12,11 +16,26 @@ export class ChangeUserUseCase {
       throw new Error('User not found');
     }
 
+    const emailExists = await this.repository.findByEmail(body.email);
+
+    if (emailExists && body.email !== user.email) {
+      throw new Error('User already exists');
+    }
+
     const { name, email, password } = body;
 
-    const userUpdate = UserFactory.update(name, email, password);
+    if (name) user.name = name;
+    if (email) user.email = email;
 
-    await this.repository.update(userUpdate);
+    if (password) {
+      const verify = this.authService.comparePassword(password, user.password);
+      if (!verify) {
+        const newPassword = UserFactory.uptadePassword(password);
+        user.password = newPassword;
+      }
+    }
+
+    await this.repository.update(id, user);
 
     return user;
   }

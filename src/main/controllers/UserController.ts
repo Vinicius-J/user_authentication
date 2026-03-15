@@ -69,6 +69,7 @@ export class UserController {
       const useCase = makeDeleUserUseCase();
 
       const user = await useCase.execute(id);
+
       return res.status(200).json(user);
     } catch (err) {
       if (err instanceof Error) return res.status(400).json({ error: err.message });
