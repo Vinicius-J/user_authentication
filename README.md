@@ -73,15 +73,14 @@ yarn install
 # ⚙️ Variáveis de ambiente
 
 Crie um arquivo `.env` na raiz do projeto.
+Você pode pegar de exemplo o arquivo `.env.example`.
 
 Exemplo:
 
 ```env
 PORT=3000
 
-JWT_SECRET=your_jwt_secret
-
-DATABASE_URL=your_database_connection
+JWT_SECRET="your_jwt_secret"
 ```
 
 ### Descrição das variáveis
@@ -90,7 +89,6 @@ DATABASE_URL=your_database_connection
 | ------------ | -------------------------------------------- |
 | PORT         | Porta em que a aplicação será executada      |
 | JWT_SECRET   | Chave secreta usada para gerar os tokens JWT |
-| DATABASE_URL | String de conexão com o banco de dados       |
 
 ---
 
