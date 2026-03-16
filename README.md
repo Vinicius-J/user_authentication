@@ -86,11 +86,11 @@ DATABASE_URL=your_database_connection
 
 ### Descrição das variáveis
 
-| Variável | Descrição |
-|--------|--------|
-| PORT | Porta em que a aplicação será executada |
-| JWT_SECRET | Chave secreta usada para gerar os tokens JWT |
-| DATABASE_URL | String de conexão com o banco de dados |
+| Variável     | Descrição                                    |
+| ------------ | -------------------------------------------- |
+| PORT         | Porta em que a aplicação será executada      |
+| JWT_SECRET   | Chave secreta usada para gerar os tokens JWT |
+| DATABASE_URL | String de conexão com o banco de dados       |
 
 ---
 
@@ -230,18 +230,29 @@ Authorization: Bearer TOKEN
 
 ```
 src
- ├── controllers
+ ├── domain
+ │     ├── entities
+ │     ├── repositories
+ │     ├── services
  │
- ├── services
+ ├── application
+ │     ├── dtos
+ │     ├── factories
+ │     ├── services
+ │     ├── useCases
  │
- ├── repositories
+ ├── infrastructure
+ │     ├── auth
+ │     ├── mappers
+ │     ├── controllers
+ │     ├── middlewares
+ │     ├── repositories
  │
- ├── middlewares
+ ├── main
+ │     ├── factories
+ │     ├── routes
  │
- ├── routes
- │
- ├── config
- │
+ ├── app.ts
  └── server.ts
 ```
 
